@@ -1,0 +1,87 @@
+﻿body, ul, div, li, header, h2, span
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    font-family: 'Segoe UI';
+    background-color: #ddd;
+}
+
+ul
+{
+    list-style-type: none;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+#main-content
+{
+    margin: auto;
+    width: 650px;
+}
+
+    #main-content header
+    {
+        border: 1px solid #000;
+    }
+
+        #main-content header span
+        {
+            display: inline-block;
+            width: 100px;
+            border: 1px solid #000;
+        }
+
+        #main-content header h2
+        {
+            display: inline-block;
+            margin: auto;
+        }
+
+/*  Actions    */
+#actions
+{
+    float: left;
+    width: 150px;
+    height: 500px;
+    border: 1px solid #000;
+}
+
+/*  Shop    */
+#shop
+{
+    float: right;
+    width: 150px;
+    height: 500px;
+    border: 1px solid #000;
+}
+
+/*  Hero    */
+#hero
+{
+    position: relative;
+    margin-left: 155px;
+    width: 340px;
+    height: 500px;
+}
+
+#hero-items
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #000;
+}
+
+.hero-item
+{
+    width: 30px;
+    height: 30px;
+}

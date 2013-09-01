@@ -90,7 +90,8 @@ window.persisters = (function () {
             this.apiUrl = apiUrl;
         },
         create: function (heroData) {
-            var url = this.apiUrl + 'create';
+            debugger;
+            var url = this.apiUrl;
             var headers = {
                 'X-sessionKey': getSessionKey()
             };

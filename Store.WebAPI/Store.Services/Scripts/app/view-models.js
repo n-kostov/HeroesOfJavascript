@@ -1,6 +1,6 @@
 ﻿/// <reference path="../libs/_references.js" />
 window.VMfactory = (function () {
-    var data = persisters.get("/api");
+    var data = persisters.get("http://heroesofjavascript.apphb.com/api");
 
     function getLoginViewModel(successCallback) {
         var viewModel = {
@@ -18,12 +18,25 @@ window.VMfactory = (function () {
             register: function () {
                 //TODO verify data
                 data.users.register(this.get('username'), this.get('displayName'), this.get('password'))
+                .then(function (name) {
+                    hero = {
+                        "name": name,
+                        "hp": 200,
+                        "mp": 100,
+                        "magicAttack": 20,
+                        "meleAttack": 20,
+                        "magicDefense": 10,
+                        "meleDefense": 10,
+                        "experience": 0,
+                        "level": 1
+                    }
+                    data.heros.create(hero)
                     .then(function () {
-                        //TODO create hero
                         if (successCallback) {
                             successCallback();
                         }
-                    });
+                    })
+                });
             },
             setAvatar: function () {
                 data.users;

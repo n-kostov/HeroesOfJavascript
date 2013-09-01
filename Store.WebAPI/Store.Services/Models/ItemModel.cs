@@ -19,12 +19,16 @@ namespace Store.Services.Models
                 {
                     ItemId = x.ItemId,
                     Name = x.Name,
+                    HP = x.HP,
+                    MP = x.MP,
                     MeleAttack = x.MeleAttack,
                     MagicDefense = x.MagicDefense,
                     MeleDefense = x.MeleDefense,
                     MagicAttack = x.MagicAttack,
                     ItemCategory = x.ItemCategory.Name,
-                    Description = x.Description
+                    Description = x.Description,
+                    Equiped = x.Equiped,
+                    ImageUrl = x.ImageUrl
                 };
             }
         }
@@ -37,6 +41,12 @@ namespace Store.Services.Models
 
         [DataMember(Name = "description")]
         public string Description { get; set; }
+
+        [DataMember(Name = "hp")]
+        public int HP { get; set; }
+
+        [DataMember(Name = "mp")]
+        public int MP { get; set; }
 
         [DataMember(Name = "magicAttack")]
         public int MagicAttack { get; set; }
@@ -52,6 +62,12 @@ namespace Store.Services.Models
 
         [DataMember(Name = "itemCategory")]
         public string ItemCategory { get; set; }
+
+        [DataMember(Name = "imageUrl")]
+        public string ImageUrl { get; set; }
+
+        [DataMember(Name = "equiped")]
+        public bool Equiped { get; set; }
     }
 
     [DataContract]
@@ -77,5 +93,8 @@ namespace Store.Services.Models
 
         [DataMember(Name = "itemCategory")]
         public string ItemCategory { get; set; }
+
+        [DataMember(Name = "imageUrl")]
+        public string ImageUrl { get; set; }
     }
 }

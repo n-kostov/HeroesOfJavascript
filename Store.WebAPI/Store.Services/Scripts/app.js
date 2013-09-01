@@ -1,7 +1,6 @@
 ﻿/// <reference path="libs/_references.js" />
 (function () {
-    var appLayout = new kendo.Layout('<div id="main-content"></div>');
-    var heroLayout = new kendo.Layout('<div id="hero-main"></div>');
+    var appLayout = new kendo.Layout('<div id="main-nav"></div><aside id="shop"></aside><aside id="actions"></aside><div id="main-view"></div>');
     var data = persisters.get("api/");
 
     VMfactory.setPersister(data);
@@ -18,47 +17,90 @@
         if (data.users.currentUser()) {
             router.navigate("/");
         } else {
-            viewsFactory.getTemplate('login-form')
+            viewsFactory.getView('login-form')
                 .then(function (viewHtml) {
                     var viewModel = VMfactory.getLoginVM(
                         function () {
                             router.navigate("/home");
                         });
                     var view = new kendo.View(viewHtml, { model: viewModel });
-                    appLayout.showIn("#main-content", view);
-                })
+                    appLayout.showIn("#main-nav", view);
+                }, function (err) {
+                    alert(err);
+                });
         }
     });
     router.route("/home", function () {
         if (!data.users.currentUser()) {
-            router.navigate("/");
+            router.navigate("/login");
         } else {
-            viewsFactory.getTemplate("game")
+            viewsFactory.getView("home")
                 .then(function (viewHtml) {
                     var viewModel = VMfactory.getGameVM(
                         function () {
-                            router.navigate("/");
+                            $("#app").children().children().not("#main-nav").html("");
+                            router.navigate("/login");
                         });
                     var view = new kendo.View(viewHtml, { model: viewModel });
-                    appLayout.showIn("#main-content", view);
-                    heroLayout.render("#main-content>div");
-                    return;
+                    appLayout.showIn("#main-nav", view);
                 })
                 .then(function () {
-                    viewsFactory.getTemplate('hero-main')
-                        .then(function (viewHtml) {
-                            var viewModel = VMfactory.getHeroVM();
-                            var view = new kendo.View(viewHtml, { model: viewModel });
-                            appLayout.showIn("#hero-main", view);
+                    viewsFactory.getView("hero")
+                    .then(function (viewHtml) {
+                        VMfactory.getHeroVM(function (vm) {
+                            var view = new kendo.View(viewHtml, { model: vm });
+                            appLayout.showIn("#main-view", view);
                         })
-                }
-            );
+                        .then(function (vm) {
+                            var view = new kendo.View(viewHtml, { model: vm });
+                            appLayout.showIn("#main-view", view);
+                        }, function (err) {
+                            alert(err);
+                        });
+                    });
+                })
+                .then(function () {
+                    viewsFactory.getView("shop")
+                    .then(function (viewHtml) {
+                        VMfactory.getShopVM()
+                        .then(function (vm) {
+                            var view = new kendo.View(viewHtml, { model: vm });
+                            appLayout.showIn("#shop", view);
+                        }, function (err) {
+                            alert(err);
+                        });
+                    });
+                })
+                .then(function () {
+                    viewsFactory.getView("actions")
+                    .then(function (viewHtml) {
+                        var viewModel = VMfactory.getActionsVM();
+                        var view = new kendo.View(viewHtml, { model: viewModel });
+                        appLayout.showIn("#actions", view);
+                    });
+                });
         }
     });
-    
-    $(function () {
-        appLayout.render('#app');
+    router.route("/shop/:id", function (id) {
+        if (data.users.currentUser()) {
+            router.navigate("/");
+        } else {
+            viewsFactory.getView('item')
+                .then(function (viewHtml) {
+                    VMfactory.getItemVM(id)
+                        .then(function (vm) {
+                            var view = new kendo.View(viewHtml, { model: vm });
+                            appLayout.showIn("#main-view", view);
+                        },
+                        function (err) {
+                            alert(err);
+                        });
+            });
+        }
+    });
 
+    $(function () {
+        appLayout.render($('#app'));
         router.start();
-    })
+    });
 }());

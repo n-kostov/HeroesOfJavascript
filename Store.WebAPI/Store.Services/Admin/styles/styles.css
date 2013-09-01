@@ -48,7 +48,11 @@ a:hover {
 #logout-btn,
 #register-btn,
 #login-link-btn,
-#register-link-btn {
+#register-link-btn,
+#get-users-btn,
+#create-mosnter-btn,
+#get-monsters-btn,
+#mnstr-create-btn {
   background: #ccc;
   padding: 10px;
   border-radius: 5px;
@@ -58,7 +62,15 @@ a:hover {
 #logout-btn:hover,
 #register-btn:hover,
 #login-link-btn:hover,
-#register-link-btn:hover {
+#register-link-btn:hover,
+#get-users-btn:hover,
+#create-mosnter-btn:hover,
+#get-monsters-btn:hover,
+#mnstr-create-btn:hover {
   background: #00b;
   color: #fff;
+}
+#users-list,
+#user-details {
+  margin: 20px 0 0 10px;
 }

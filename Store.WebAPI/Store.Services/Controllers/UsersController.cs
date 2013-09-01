@@ -150,7 +150,7 @@ namespace Store.Services.Controllers
                       context.SaveChanges();
 
                       var response =
-                          this.Request.CreateResponse(HttpStatusCode.OK);
+                          this.Request.CreateResponse(HttpStatusCode.OK, new LoggedUserModel());
                       return response;
                   }
               });
@@ -159,7 +159,7 @@ namespace Store.Services.Controllers
         }
 
         [ActionName("byId")]
-        public IQueryable<UserAdminModel> GetUserById(int id, [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
+        public UserAdminModel GetUserById(int id, [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
         {
             var response = this.PerformOperationAndHandleExceptions(() =>
             {
@@ -170,51 +170,17 @@ namespace Store.Services.Controllers
                 {
                     throw new InvalidOperationException("Invalid session key");
                 }
-
-                var user =
-                    (from u in context.Users
-                     where u.UserId == id
-                     join h in context.Heros on u.Hero.HeroId equals h.HeroId
-                     select new UserAdminModel
-                     {
-                         UserId = u.UserId,
-                         Username = u.Username,
-                         DisplayName = u.DisplayName,
-                         Gold = u.Gold,
-                         Hero = new HeroModel
-                         {
-                             Name = u.Hero.Name,
-                             HP = u.Hero.HP,
-                             MP = u.Hero.MP,
-                             MagicAttack = u.Hero.MagicAttack,
-                             MeleAttack = u.Hero.MeleAttack,
-                             MagicDefense = u.Hero.MagicDefense,
-                             MeleDefense = u.Hero.MeleDefense,
-                             Experience = u.Hero.Experience,
-                             Level = u.Hero.Experience,
-                             Items =
-                                (from i in u.Hero.Items
-                                 join m in context.Items on i.ItemId equals m.ItemId
-                                 select new ItemModel
-                                 {
-                                     Name = i.Name,
-                                     Description = i.Description,
-                                     MagicAttack = i.MagicAttack,
-                                     MeleAttack = i.MeleAttack,
-                                     MagicDefense = i.MagicDefense,
-                                     MeleDefense = i.MeleDefense,
-                                     ItemCategory = i.ItemCategory.Name
-                                 }).AsQueryable()
-                         }
-                     });
-                return user;
+                var fromUser = UserAdminModel.FromUser;
+                var user = context.Users.Select(fromUser);
+                return user.FirstOrDefault(u => u.UserId == id);
             });
 
             return response;
         }
 
         [HttpGet]
-        public IQueryable<UserAdminSimpleModel> GetAll([ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
+        public IQueryable<UserAdminSimpleModel> GetAll(
+            [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
         {
             var response = this.PerformOperationAndHandleExceptions(() =>
             {

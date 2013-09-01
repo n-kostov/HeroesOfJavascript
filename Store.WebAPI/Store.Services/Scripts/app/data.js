@@ -3,7 +3,7 @@ window.persisters = (function () {
     function saveUserData(userData) {
         if (userData.sessionKey && userData.displayName) {
             localStorage.setItem('sessionKey', userData.sessionKey);
-            localStorage.setItem('displayName', userData.displayName)
+            localStorage.setItem('displayName', userData.displayName);
         }
     }
     function clearUserData() {
@@ -18,7 +18,7 @@ window.persisters = (function () {
         init: function (apiUrl) {
             this.apiUrl = apiUrl;
             this.users = new UserPersister(apiUrl + 'users/');
-            this.heros = new HeroPersister(apiUrl + 'heros/');
+            this.heros = new HeroPersister(apiUrl + 'hero/');
             this.monsters = new MonsterPersister(apiUrl + 'monsters/');
             this.items = new ItemsPersister(apiUrl + 'items/');
         },
@@ -35,7 +35,6 @@ window.persisters = (function () {
             var url = this.apiUrl + 'register';
             user = {
                 username: username,
-                displayName: username,
                 displayName: username, //TODO implement with username
                 authCode: CryptoJS.SHA1(password).toString()
             };
@@ -66,7 +65,7 @@ window.persisters = (function () {
                 'X-sessionKey': getSessionKey()
             };
             clearUserData();
-            return request.putJSON(url, { }, headers)
+            return request.putJSON(url, {}, headers)
                 .then(function (data) {
                     return data;
                 });
@@ -78,11 +77,11 @@ window.persisters = (function () {
             var url = this.apiUrl + 'avatar';
             user = {
                 avatarUrl: avatarUrl,
-            }
+            };
             var headers = {
                 'X-sessionKey': getSessionKey()
             };
-            return request.putJSON(url, user, headers)
+            return request.putJSON(url, user, headers);
         }
     });
 
@@ -97,8 +96,22 @@ window.persisters = (function () {
             };
             return request.postJSON(url, heroData, headers);
         },
-        get: function () {
-            var url = this.apiUrl + 'get';
+        getAll: function () {
+            var url = this.apiUrl + 'getAll';
+            var headers = {
+                'X-sessionKey': getSessionKey()
+            };
+            return request.getJSON(url, headers);
+        },
+        getById: function (id) {
+            var url = this.apiUrl + 'getById/' + id;
+            var headers = {
+                'X-sessionKey': getSessionKey()
+            };
+            return request.getJSON(url, headers);
+        },
+        getUsersHero: function () {
+            var url = this.apiUrl + 'getUsersHero';
             var headers = {
                 'X-sessionKey': getSessionKey()
             };
@@ -118,7 +131,7 @@ window.persisters = (function () {
             this.apiUrl = apiUrl;
         },
         get: function () {
-            var url = this.apiUrl + 'get/';
+            var url = this.apiUrl;
             return request.getJSON(url);
         }
     });
@@ -126,12 +139,33 @@ window.persisters = (function () {
     var ItemsPersister = Class.create({
         init: function (apiUrl) {
             this.apiUrl = apiUrl;
+        },
+        get: function () {
+            var url = this.apiUrl;
+            var headers = {
+                "X-sessionKey": getSessionKey()
+            };
+            return request.getJSON(url, headers);
+        },
+        getById: function (id) {
+            var url = this.apiUrl + id;
+            var headers = {
+                "X-sessionKey": getSessionKey()
+            };
+            return request.getJSON(url, headers);
+        },
+        getByCategory: function (category) {
+            var url = this.apiUrl + '?category=' + category;
+            var headers = {
+                "X-sessionKey": getSessionKey()
+            };
+            return request.getJSON(url, headers);
         }
-    })
+    });
 
     return {
         get: function (apiUrl) {
-            return new MainPersister(apiUrl)
+            return new MainPersister(apiUrl);
         }
-    }
+    };
 }());

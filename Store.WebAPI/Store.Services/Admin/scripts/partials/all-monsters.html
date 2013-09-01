@@ -5,8 +5,11 @@
 <a href="#/items" id="get-items.btn">Get All Items</a>
 <a href="#" id="logout-btn" ng-click="logoutAdmin()">Logout</a>
 
-<ul id="users-list">
-    <li ng-repeat="user in users">
-        <a href="#/users/{{user.userId}}">{{user.username}}</a>
+<br />
+<br />
+<a href="#/monster/create">Create new monster</a>
+<ul id="monsters-list">
+    <li ng-repeat="mon in monsters">
+        <a href="#/monster/{{mon.id}}">{{mon.name}}</a>
     </li>
 </ul>

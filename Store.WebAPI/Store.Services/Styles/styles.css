@@ -1,13 +1,7 @@
-﻿body, ul, div, li, header, h2, span
+﻿body, ul, div, li, header, h1, h2, h3, span, p
 {
     margin: 0;
     padding: 0;
-}
-
-body
-{
-    font-family: 'Segoe UI';
-    background-color: #ddd;
 }
 
 ul
@@ -20,68 +14,147 @@ a
     text-decoration: none;
 }
 
-#main-content
+body
 {
-    margin: auto;
-    width: 650px;
+    font-family: 'Segoe UI';
 }
 
-    #main-content header
+#app
+{
+    margin: auto;
+    width: 720px;
+    padding: 3%;
+    background-color: #eee;
+    -webkit-box-shadow: 0 0 15px #000;
+    box-shadow: 0 0 15px #000;
+}
+
+#main-nav header h2
+{
+    display: inline-block;
+    margin: 0 18% 20px;
+}
+
+#main-nav header button
+{
+    float: right;
+}
+
+aside
+{
+    width: 20%;
+    border-radius: 5px;
+    padding: 1%;
+    -webkit-box-shadow: #000 0 0 2px inset;
+    box-shadow: #000 0 0 2px inset;
+}
+
+    aside h3
     {
-        border: 1px solid #000;
+        border-bottom: 1px solid #000;
+        margin: 0 3px 10px;
+        padding: 0 20px;
     }
-
-        #main-content header span
-        {
-            display: inline-block;
-            width: 100px;
-            border: 1px solid #000;
-        }
-
-        #main-content header h2
-        {
-            display: inline-block;
-            margin: auto;
-        }
 
 /*  Actions    */
 #actions
 {
     float: left;
-    width: 150px;
-    height: 500px;
-    border: 1px solid #000;
 }
 
 /*  Shop    */
 #shop
 {
     float: right;
-    width: 150px;
-    height: 500px;
-    border: 1px solid #000;
 }
+
+    #shop .shop-item
+    {
+        display: inline-block;
+        margin: 2%;
+        width: 43%;
+        height: 60px;
+        border-radius: 4px;
+    }
+
+        #shop .shop-item:hover, #hero ul .hero-item:hover
+        {
+            -webkit-box-shadow: #000 0 0 5px;
+            box-shadow: #000 0 0 5px;
+        }
+
+        #shop .shop-item:active, #hero ul .hero-item:active
+        {
+            -webkit-box-shadow: #000 0 0 5px inset;
+            box-shadow: #000 0 0 5px inset;
+        }
+
+        #shop .shop-item img
+        {
+            margin: 5%;
+            height: 90%;
+            width: 90%;
+        }
 
 /*  Hero    */
-#hero
+#main-view
 {
     position: relative;
-    margin-left: 155px;
-    width: 340px;
+    margin-left: 25%;
+    width: 50%;
     height: 500px;
 }
 
-#hero-items
+#hero
 {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 30px;
-    border: 1px solid #000;
 }
 
-.hero-item
-{
-    width: 30px;
-    height: 30px;
-}
+    #hero #hero-stats
+    {
+        font-size: 0.8rem;
+    }
+
+        #hero #hero-stats p
+        {
+            margin: 2px;
+        }
+
+    #hero > img
+    {
+        position: absolute;
+        margin: 0 5%;
+        width: 90%;
+        height: 90%;
+    }
+
+    #hero ul
+    {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 32px;
+        padding: 2px;
+    }
+
+        #hero ul .hero-item
+        {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            border-radius: 2px;
+            border: 1px solid #888;
+        }
+
+            #hero ul .hero-item img
+            {
+                margin: 10%;
+                height: 80%;
+                width: 80%;
+            }
+
+            #hero ul .equiped
+            {
+                border: 1px solid #fa0;
+                -webkit-box-shadow: #fa0 0 0 5px inset;
+                box-shadow: #fa0 0 0 5px inset;
+            }

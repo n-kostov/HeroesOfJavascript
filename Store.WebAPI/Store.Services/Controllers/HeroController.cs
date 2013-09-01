@@ -14,6 +14,74 @@ namespace Store.Services.Controllers
 {
     public class HeroController : BaseApiController
     {
+        public HttpResponseMessage GetAll(
+            [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
+        {
+            var response = this.PerformOperationAndHandleExceptions(() =>
+            {
+                var context = new StoreContext();
+
+                var user = context.Users.FirstOrDefault(usr => usr.SessionKey == sessionKey);
+                if (user == null)
+                {
+                    throw new InvalidOperationException("Invalid session key");
+                }
+
+                var heros = context.Heros.Select(HeroModel.FromHero);
+
+                var responseMsg = this.Request.CreateResponse(HttpStatusCode.OK, heros);
+                return responseMsg;
+            });
+
+            return response;
+        }
+
+        public HttpResponseMessage GetUsersHero(
+            [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
+        {
+            var response = this.PerformOperationAndHandleExceptions(() =>
+            {
+                var context = new StoreContext();
+
+                var user = context.Users.FirstOrDefault(usr => usr.SessionKey == sessionKey);
+                if (user == null)
+                {
+                    throw new InvalidOperationException("Invalid session key");
+                }
+
+                var hero = context.Heros
+                    .Where(h=> h.User.UserId == user.UserId)
+                    .Select(HeroModel.FromHero);
+
+                var responseMsg = this.Request.CreateResponse(HttpStatusCode.OK, hero);
+                return responseMsg;
+            });
+
+            return response;
+        }
+
+        public HttpResponseMessage GetById(int id, 
+            [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
+        {
+            var response = this.PerformOperationAndHandleExceptions(() =>
+            {
+                var context = new StoreContext();
+
+                var user = context.Users.FirstOrDefault(usr => usr.SessionKey == sessionKey);
+                if (user == null)
+                {
+                    throw new InvalidOperationException("Invalid session key");
+                }
+
+                var hero = context.Heros.Where(h => h.HeroId == id).Select(HeroModel.FromHero);
+
+                var responseMsg = this.Request.CreateResponse(HttpStatusCode.OK, hero);
+                return responseMsg;
+            });
+
+            return response;
+        }
+
         public HttpResponseMessage PostCreateHero(HeroCreateModel heroModel,
             [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
         {
@@ -124,4 +192,5 @@ namespace Store.Services.Controllers
             hero.Level = model.Level;
         }
     }
+
 }

@@ -1,0 +1,22 @@
+﻿<div id="hero">
+    <h3 data-bind="text: name"></h3>
+    <img data-bind="attr: { src: imageUrl }" />
+    <div id="hero-stats">
+        <p>HP: <span data-bind="text: hp"></span></p>
+        <p>MP: <span data-bind="text: mp"></span></p>
+        <p>meleAttack: <span data-bind="text: meleAttack"></span></p>
+        <p>meleDefense: <span data-bind="text: meleDefense"></span></p>
+        <p>magicAttack: <span data-bind="text: magicAttack"></span></p>
+        <p>magicDefense: <span data-bind="text: magicDefense"></span></p>
+        <p>experience: <span data-bind="text: experience"></span></p>
+        <p>level: <span data-bind="text: level"></span></p>
+    </div>
+    <ul data-bind="source: items" data-template="hero-item-template">
+    </ul>
+</div>
+
+<script type="text/x-kendo-template" id="hero-item-template">
+    <li class="hero-item" data-bind="click: equipe, attr: { id: itemId }">
+        <img data-bind="attr: { src: imageUrl }" />
+    </li>
+</script>

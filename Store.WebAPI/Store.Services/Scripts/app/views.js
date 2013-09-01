@@ -3,7 +3,7 @@ window.viewsFactory = (function () {
     var rootUrl = "Scripts/partials/";
     var templates = {};
 
-    function getTempate(name) {
+    function getTemplate(name) {
         var promise = new RSVP.Promise(function (resolve, reject) {
             if (templates[name]) {
                 resolve(templates[name]);
@@ -30,7 +30,7 @@ window.viewsFactory = (function () {
     //};
 
     return {
-        getTemplate: getTempate,
+        getView: getTemplate,
         //loginView: getLoginView
     };
 }());

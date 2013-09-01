@@ -21,19 +21,19 @@ namespace Store.Services.Models
                     Username = x.Username,
                     DisplayName = x.DisplayName,
                     Gold = x.Gold ?? 0m,
-                    Hero = new HeroModel
-                    {
-                        Name = x.Hero.Name,
-                        HP = x.Hero.HP,
-                        MP = x.Hero.MP,
-                        MagicAttack = x.Hero.MagicAttack,
-                        MagicDefense = x.Hero.MagicDefense,
-                        MeleAttack = x.Hero.MeleAttack,
-                        MeleDefense = x.Hero.MeleDefense,
-                        Experience = x.Hero.Experience,
-                        Level = x.Hero.Level,
-                        Items = x.Hero.Items.AsQueryable().Select(ItemModel.FromItem)
-                    }
+                    //Hero = x.Hero == null ? null : new HeroModel
+                    //{
+                    //    Name = x.Hero.Name,
+                    //    HP = x.Hero.HP,
+                    //    MP = x.Hero.MP,
+                    //    MagicAttack = x.Hero.MagicAttack,
+                    //    MagicDefense = x.Hero.MagicDefense,
+                    //    MeleAttack = x.Hero.MeleAttack,
+                    //    MeleDefense = x.Hero.MeleDefense,
+                    //    Experience = x.Hero.Experience,
+                    //    Level = x.Hero.Level,
+                    //    //Items = x.Hero.Items.AsQueryable().Select(ItemModel.FromItem)
+                    //}
                     //Hero = Enumerable.Repeat(x.Hero, 1).AsQueryable().Select(HeroModel.FromHero).First()
                 };
             }

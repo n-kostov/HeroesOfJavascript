@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 
 namespace Store.Services.Models
 {
+    [DataContract]
     public class HeroModel
     {
         public static Expression<Func<Hero, HeroModel>> FromHero

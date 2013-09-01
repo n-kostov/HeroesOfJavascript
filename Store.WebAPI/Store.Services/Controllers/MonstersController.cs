@@ -49,6 +49,15 @@ namespace Store.Services.Controllers
             return responseMsg;
         }
 
+        public MonsterModel GetById(
+            int id,
+            [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
+        {
+            var models = this.GetAll(sessionKey)
+                .Where(i => i.MonsterId == id);
+            return models.FirstOrDefault();
+        }
+
         public HttpResponseMessage PostCreateMonster(
             MonsterModel model,
             [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
@@ -100,7 +109,7 @@ namespace Store.Services.Controllers
 
         public HttpResponseMessage PutUpdateMonster(
             int id,
-            [FromBody] UpdatingItemModel model,
+            [FromBody] MonsterModel model,
             [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
         {
             var responseMsg = this.PerformOperationAndHandleExceptions(
@@ -121,6 +130,7 @@ namespace Store.Services.Controllers
                           throw new ArgumentOutOfRangeException("monsterId", "Invalid monster");
                       }
 
+                      UpdateMonster(monster, model, context);
                       context.SaveChanges();
 
                       var response =
@@ -130,6 +140,20 @@ namespace Store.Services.Controllers
               });
 
             return responseMsg;
+        }
+
+        private void UpdateMonster(Monster monster, MonsterModel model, StoreContext context)
+        {
+            if (model.Name != null)
+            {
+                monster.Name = model.Name;
+            }
+
+            monster.MagicAttack = model.MagicAttack;
+            monster.MagicDefense = model.MagicDefense;
+            monster.MeleAttack = model.MeleAttack;
+            monster.MeleDefense = model.MeleDefense;
+            monster.HP = model.HP;
         }
     }
 }

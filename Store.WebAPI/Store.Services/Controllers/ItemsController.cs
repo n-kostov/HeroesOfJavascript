@@ -29,20 +29,21 @@ namespace Store.Services.Controllers
                     throw new InvalidOperationException("Invalid session key!");
                 }
 
-                var itemEntities = context.Items;
-                var models =
-                     from itemEntity in itemEntities
-                     select new ItemModel()
-                     {
-                         ItemId = itemEntity.ItemId,
-                         Name = itemEntity.Name,
-                         Description = itemEntity.Description,
-                         MagicAttack = itemEntity.MagicAttack,
-                         MeleAttack = itemEntity.MeleAttack,
-                         MagicDefense = itemEntity.MagicDefense,
-                         MeleDefense = itemEntity.MeleDefense,
-                         ItemCategory = itemEntity.ItemCategory.Name
-                     };
+                var models = context.Items.Select(ItemModel.FromItem);
+                //var models =
+                //     from itemEntity in itemEntities
+                //     select new ItemModel()
+                //     {
+                //         ItemId = itemEntity.ItemId,
+                //         Name = itemEntity.Name,
+                //         Description = itemEntity.Description,
+                //         MagicAttack = itemEntity.MagicAttack,
+                //         MeleAttack = itemEntity.MeleAttack,
+                //         MagicDefense = itemEntity.MagicDefense,
+                //         MeleDefense = itemEntity.MeleDefense,
+                //         ImageUrl = itemEntity.ImageUrl,
+                //         ItemCategory = itemEntity.ItemCategory.Name
+                //     };
 
                 return models;
             });
@@ -112,7 +113,11 @@ namespace Store.Services.Controllers
                             MeleAttack = model.MeleAttack,
                             MagicDefense = model.MagicDefense,
                             MagicAttack = model.MagicAttack,
-                            Description = model.Description
+                            Description = model.Description,
+                            ImageUrl = model.ImageUrl,
+                            Equiped = false,
+                            HP = model.HP,
+                            MP = model.MP
                         };
 
                         context.Items.Add(item);
@@ -178,6 +183,11 @@ namespace Store.Services.Controllers
             if (model.Description != null)
             {
                 item.Description = model.Description;
+            }
+
+            if (model.ImageUrl != null)
+            {
+                item.ImageUrl = model.ImageUrl;
             }
 
             if (model.ItemCategory != null)

@@ -167,7 +167,10 @@
     <Compile Include="Attributes\HeaderValueProviderFactory.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
-    <Compile Include="Controllers\HeroController.cs" />    <Compile Include="Controllers\MonstersController.cs" />    <Compile Include="Models\CreatedItemModel.cs" />    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HeroController.cs" />
+    <Compile Include="Controllers\MonstersController.cs" />
+    <Compile Include="Models\CreatedItemModel.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -181,6 +184,31 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\index.html" />
+    <Content Include="Admin\scripts\app.js" />
+    <Content Include="Admin\scripts\app\controllers.js" />
+    <Content Include="Admin\scripts\data\users.js" />
+    <Content Include="Admin\scripts\lib\angular.js" />
+    <Content Include="Admin\scripts\lib\sha1.js" />
+    <Content Include="Admin\scripts\lib\underscore.js" />
+    <Content Include="Admin\scripts\partials\admin-login-form.html" />
+    <Content Include="Admin\scripts\partials\admin-register-form.html" />
+    <Content Include="Admin\scripts\partials\all-monsters.html" />
+    <Content Include="Admin\scripts\partials\all-users.html" />
+    <Content Include="Admin\scripts\partials\all-items.html" />
+    <Content Include="Admin\scripts\partials\update-item-form.html" />
+    <Content Include="Admin\scripts\partials\item.html" />
+    <Content Include="Admin\scripts\partials\create-item-form.html" />
+    <Content Include="Admin\scripts\partials\create-monster-form.html" />
+    <Content Include="Admin\scripts\partials\header.html" />
+    <Content Include="Admin\scripts\partials\home.html" />
+    <Content Include="Admin\scripts\partials\logout.html" />
+    <Content Include="Admin\scripts\partials\monster.html" />
+    <Content Include="Admin\scripts\partials\update-monster-form.html" />
+    <Content Include="Admin\scripts\partials\user.html" />
+    <Content Include="Admin\scripts\_references.js" />
+    <Content Include="Admin\styles\styles.css" />
+    <Content Include="Admin\styles\styles.min.css" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -249,6 +277,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Images\hero.png" />
+    <Content Include="Images\shield.png" />
+    <Content Include="Images\sword.png" />
     <Content Include="index.html" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\app\data.js" />
@@ -256,6 +287,7 @@
     <Content Include="Scripts\app\views.js" />
     <Content Include="Scripts\libs\class.js" />
     <Content Include="Scripts\libs\http-request.js" />
+    <Content Include="Admin\styles\styles.less" />
     <None Include="Scripts\libs\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\libs\jquery-2.0.3.js" />
     <Content Include="Scripts\libs\jquery-2.0.3.min.js" />
@@ -263,13 +295,19 @@
     <Content Include="Scripts\libs\kendo.web.min.js" />
     <Content Include="Scripts\libs\rsvp.js" />
     <Content Include="Scripts\libs\sha1.js" />
+    <Content Include="Scripts\libs\underscore.js" />
     <Content Include="Scripts\libs\_references.js" />
+    <Content Include="Scripts\partials\actions.html" />
     <Content Include="Scripts\partials\game.html" />
-    <Content Include="Scripts\partials\hero-main.html" />
+    <Content Include="Scripts\partials\home.html" />
+    <Content Include="Scripts\partials\hero.html" />
+    <Content Include="Scripts\partials\item.html" />
     <Content Include="Scripts\partials\login-form.html" />
+    <Content Include="Scripts\partials\shop.html" />
     <Content Include="Styles\kendo.common.min.css" />
     <Content Include="Styles\kendo.default.min.css" />
     <Content Include="Styles\kendo.silver.min.css" />
+    <Content Include="Styles\styles.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

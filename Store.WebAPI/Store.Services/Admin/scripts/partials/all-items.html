@@ -4,3 +4,12 @@
 <a href="#/monsters" id="get-monsters-btn">Get All Monsters</a>
 <a href="#/items" id="get-items.btn">Get All Items</a>
 <a href="#" id="logout-btn" ng-click="logoutAdmin()">Logout</a>
+
+<br />
+<br />
+<a href="#/item/create">Create new item</a>
+<ul id="items-list">
+    <li ng-repeat="itm in items">
+        <a href="#/item/{{itm.itemId}}">{{itm.name}}</a>
+    </li>
+</ul>

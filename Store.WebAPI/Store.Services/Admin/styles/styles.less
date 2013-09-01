@@ -1,15 +1,14 @@
-﻿html, body, div, h1, a, ul, li{
+﻿html, body, div, h1, a, ul, li {
     margin: 0;
     padding: 0;
 }
 
-body, html{
+body, html {
     height: 100%;
     font-family: 'Segoe UI';
 }
 
-#wrapper
-{
+#wrapper {
     width: 920px;
     height: 100%;
     padding: 20px;
@@ -19,12 +18,11 @@ body, html{
     box-shadow: 0 0 15px #000;
 }
 
-ul{
+ul {
     list-style: none;
 }
 
-h1
-{
+h1 {
     text-align: center;
     background: #ccc;
     width: 960px;
@@ -34,31 +32,39 @@ h1
     color: #777;
 }
 
-a{
+a {
     text-decoration: none;
     color: #000;
 
-    &:hover{
+    &:hover {
         color: #c00;
     }
 }
 
-#admin-login-form{
+#admin-login-form {
     margin-top: 35px;
 }
 
-#login-btn, 
-#logout-btn, 
-#register-btn ,
+#login-btn,
+#logout-btn,
+#register-btn,
 #login-link-btn,
-#register-link-btn {
+#register-link-btn,
+#get-users-btn,
+#create-mosnter-btn,
+#get-monsters-btn,
+#mnstr-create-btn {
     background: #ccc;
     padding: 10px;
     border-radius: 5px;
     margin-top: 200px;
 
-    &:hover{
+    &:hover {
         background: #00b;
         color: #fff;
     }
+}
+
+#users-list, #user-details {
+    margin: 20px 0 0 10px;
 }

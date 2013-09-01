@@ -41,7 +41,7 @@ namespace Store.Services.Controllers
         [ActionName("register")]
         public HttpResponseMessage PostRegisterAdmin(UserModel model, [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
         {
-            var response = this.PerformOperationAndHandleExceptions(() => 
+            var response = this.PerformOperationAndHandleExceptions(() =>
             {
                 var context = new StoreContext();
 
@@ -53,7 +53,7 @@ namespace Store.Services.Controllers
                 if (admin == null)
                 {
                     throw new InvalidOperationException("Invalid session key");
-                } 
+                }
 
                 var usernameToLower = model.Username.ToLower();
                 var displayNameToLower = model.DisplayName.ToLower();
@@ -64,7 +64,7 @@ namespace Store.Services.Controllers
                 if (existingAdmin != null)
                 {
                     throw new InvalidOperationException("Username already exists");
-                }     
+                }
 
                 Admin newAdmin = new Admin
                 {
@@ -122,7 +122,7 @@ namespace Store.Services.Controllers
                           SessionKey = admin.SessionKey
                       };
 
-                      var response = this.Request.CreateResponse(HttpStatusCode.OK, loggedModel);
+                      var response = this.Request.CreateResponse(HttpStatusCode.Created, loggedModel);
                       return response;
                   }
               });
